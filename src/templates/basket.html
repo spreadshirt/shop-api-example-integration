@@ -1,0 +1,42 @@
+{% if basket %}
+<div class="basket">
+    <table>
+        <tbody>
+        {% for item in basket.basketItems %}
+        <tr>
+            <td>
+                {{ item.description }}
+                <div class="basket__properties">
+                {% for property in item.element.properties | filter(property => property.key == 'sizeLabel') %}
+                {{ property.value }}
+                {% endfor %}
+                {% for property in item.element.properties | filter(property => property.key == 'appearanceLabel') %}
+                {{ property.value }}
+                {% endfor %}
+                </div>
+            </td>
+            <td>{{ item.quantity }}x</td>
+            <td class="basket__price">{{ item.price.display | formatCurrency }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2" class="basket__label">Items</td>
+            <td class="basket__price">{{ basket.priceItems.display | formatCurrency }}</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="basket__label">Shipping</td>
+            <td class="basket__price">{{ basket.shipping.price.display | formatCurrency }}</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="basket__label">Total</td>
+            <td class="basket__price">{{ basket.priceTotal.display | formatCurrency }}</td>
+        </tr>
+        </tfoot>
+    </table>
+    {% for link in basket.links | filter(link => link.type == 'shopCheckout') %}
+    <a href="{{ link.href }}" class="basket__checkout">Checkout</a>
+    {% endfor %}
+</div>
+{% endif %}

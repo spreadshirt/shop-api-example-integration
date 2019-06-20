@@ -1,0 +1,21 @@
+<ul class="pager">
+    {% if currentPage > 1 %}
+    <li class="pager__item">
+        <a href="?page={{ currentPage - 1 }}" class="pager__link">Previous Page</a>
+    </li>
+    {% endif %}
+    {% for page in range(1, maxPage) %}
+    <li class="pager__item">
+        {% if currentPage != page %}
+        <a href="?page={{ page }}" class="pager__link">{{ page }}</a>
+        {% else %}
+        <span class="pager__current">{{ page }}</span>
+        {% endif %}
+    </li>
+    {% endfor %}
+    {% if currentPage < maxPage %}
+    <li class="pager__item">
+        <a href="?page={{ currentPage + 1 }}" class="pager__link">Next Page</a>
+    </li>
+    {% endif %}
+</ul>

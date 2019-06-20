@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include('pager.html') %}
+<ul class="sellables">
+    {% for sellable in sellables %}
+    <li class="sellables__item">
+        <a href="?sellableId={{ sellable.sellableId }}&ideaId={{ sellable.ideaId }}&appearanceId={{ sellable.defaultAppearanceId }}" class="sellables__link">
+            <div class="sellables__content">
+                <h2>{{ sellable.name }}</h2>
+                {% if sellable.description %}<p>{{ sellable.description }}</p>{% endif %}
+            </div>
+            <img src="{{ sellable.previewImage }}" alt="" class="sellables__preview">
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% include('pager.html') %}
+{% endblock %}

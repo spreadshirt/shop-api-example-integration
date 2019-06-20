@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="detail">
+    <h1>{{ sellable.name }}</h1>
+    {% if sellable.description %}<p>{{ sellable.description }}</p>{% endif %}
+    <ul class="detail__images">
+        {% for image in sellable.images %}
+        <li class="detail__images__item">
+            <img src="{{ image }}" alt="" class="detail__images__image">
+        </li>
+        {% endfor %}
+    </ul>
+    <ul class="appearances">
+        {% for appearance in sellable.appearanceIds %}
+        <li class="appearances__item">
+            {% if currentAppearance == appearance %}
+            <span class="appearances__current">{{ appearances[appearance] }}</span>
+            {% else %}
+            <a href="?{{ sellableParams }}&appearanceId={{ appearance }}" class="appearances__link">{{ appearances[appearance] }}</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    <p>Price: {{ sellable.price.amount | formatCurrency }}</p>
+    <form action="" method="post" class="add-to-basket">
+        <label>
+            Quantity:
+            <input type="number" name="quantity" value="1" min="1" max="99" step="1" required class="add-to-basket__quantity">
+        </label>
+        <fieldset class="add-to-basket__sizes">
+            <span>Size</span>
+            {% for sizeId in sellable.sizeIds %}
+            <label class="add-to-basket__size">
+                <input type="radio" name="sizeId" value="{{ sizeId }}" required>
+                {{ sizes[sizeId] }}
+            </label>
+            {% endfor %}
+        </fieldset>
+        <button name="action" value="addToBasket" type="submit" class="add-to-basket__submit">Add to Basket</button>
+    </form>
+</div>
+{% endblock %}
