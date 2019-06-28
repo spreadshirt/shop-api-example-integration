@@ -8,18 +8,20 @@ require __DIR__ . '/Basket.php';
 
 const API_URL = 'https://api.spreadshirt.net/api/v1';
 const API_KEY = '';
+const USER_AGENT = 'ShopApiExampleIntegration-1.0';
 const SHOP_ID = 100229382;
 
 if (empty(API_KEY)) {
   exit('Please configure your API_KEY. See https://developer.spreadshirt.net/display/API/Security for further information');
 }
 
-$authorizationHeader = [
-  'Authorization' => 'SprdAuth apiKey="' . API_KEY . '"'
+$requiredHeaders = [
+  'Authorization' => 'SprdAuth apiKey="' . API_KEY . '"',
+  'User-Agent' => USER_AGENT
 ];
 
-$shop = new Shop(API_URL, SHOP_ID, $authorizationHeader);
-$basket = new Basket(API_URL, SHOP_ID, $authorizationHeader);
+$shop = new Shop(API_URL, SHOP_ID, $requiredHeaders);
+$basket = new Basket(API_URL, SHOP_ID, $requiredHeaders);
 $twig = new \Twig\Environment(new \Twig\Loader\FilesystemLoader(__DIR__ . '/templates'));
 $basket->addBasketToRenderer($twig);
 

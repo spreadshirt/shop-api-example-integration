@@ -10,8 +10,8 @@ class Shop {
   private $client;
   private $productTypeCache;
 
-  public function __construct($apiUrl, $shopId, $authorizationHeader) {
-    $this->client = new GuzzleHttp\Client(['base_uri' => $apiUrl . '/shops/' . $shopId . '/', 'headers' => $authorizationHeader]);
+  public function __construct($apiUrl, $shopId, $requiredHeaders) {
+    $this->client = new GuzzleHttp\Client(['base_uri' => $apiUrl . '/shops/' . $shopId . '/', 'headers' => $requiredHeaders]);
 
     $this->productTypeCache = new Memcached();
     $this->productTypeCache->addServer('memcached', '11211');

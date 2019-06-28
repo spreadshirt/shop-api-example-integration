@@ -9,8 +9,8 @@ class Basket {
   private $shopId;
   private $basket;
 
-  public function __construct($apiUrl, $shopId, $authorizationHeader) {
-    $this->client = new GuzzleHttp\Client(['base_uri' => $apiUrl . '/baskets', 'headers' => $authorizationHeader]);
+  public function __construct($apiUrl, $shopId, $requiredHeaders) {
+    $this->client = new GuzzleHttp\Client(['base_uri' => $apiUrl . '/baskets', 'headers' => $requiredHeaders]);
 
     $this->shopId = $shopId;
 
