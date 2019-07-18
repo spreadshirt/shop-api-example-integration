@@ -7,7 +7,7 @@
     <ul class="detail__images">
         {% for image in sellable.images %}
         <li class="detail__images__item">
-            <img src="{{ image }}" alt="" class="detail__images__image">
+            <img src="{{ image.url }}" alt="" class="detail__images__image">
         </li>
         {% endfor %}
     </ul>

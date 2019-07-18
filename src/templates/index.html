@@ -10,7 +10,7 @@
                 <h2>{{ sellable.name }}</h2>
                 {% if sellable.description %}<p>{{ sellable.description }}</p>{% endif %}
             </div>
-            <img src="{{ sellable.previewImage }}" alt="" class="sellables__preview">
+            <img src="{{ sellable.previewImage.url }}" alt="" class="sellables__preview">
         </a>
     </li>
     {% endfor %}
