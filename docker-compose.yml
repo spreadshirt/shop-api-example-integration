@@ -11,6 +11,5 @@ services:
       - "8008:80"
     links:
       - memcached
-    restart: always
   memcached:
     image: memcached:1.5
